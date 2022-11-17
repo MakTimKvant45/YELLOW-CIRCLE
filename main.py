@@ -5,11 +5,13 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtGui import QPainter, QColor
 
+from ui import Ui_Form
 
-class MyWidget(QMainWindow):
+
+class MyWidget(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ui.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.qp = QPainter()
         self.draw_btn.clicked.connect(self.paint)
@@ -25,7 +27,7 @@ class MyWidget(QMainWindow):
         self.repaint()
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor('yellow'))
+        qp.setBrush(QColor(rnd(1, 255), rnd(1, 255), rnd(1, 255)))
         circle_size = rnd(1, 300)
         rand_x = rnd(1, 725)
         rand_y = rnd(1, 554)
